@@ -27,7 +27,8 @@ module.exports.run = (event, context, callback) => {
       country: item.country,
       x: item.x / item.width,
       y: item.y / item.height,
-      tries: item.tries
+      tries: item.tries,
+      mobile: item.width <= 500 ? 1 : 0
     }));
 
     const tsv = dsv.tsvFormat(items);
