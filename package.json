@@ -1,0 +1,11 @@
+{
+  "name": "point-to-ukraine",
+  "version": "1.0.0",
+  "description": "Serverless CRUD service exposing a REST HTTP interface",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "d3-dsv": "^1.2.0",
+    "uuid": "^2.0.3"
+  }
+}
