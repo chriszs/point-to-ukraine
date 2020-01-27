@@ -2,6 +2,7 @@
 
 const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
 const dsv = require('d3-dsv');
+const geo = require('d3-geo');
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 const params = {
@@ -22,16 +23,28 @@ module.exports.run = (event, context, callback) => {
     const triesToKeep = [1, 2, 3, 4, 5];
 
     const items = result.Items.filter(
-          item => triesToKeep.indexOf(item.tries) !== -1
-        )
-        .sort((a,b) => b.createdAt-a.createdAt)
-        .map(item => ({
+      item => triesToKeep.indexOf(item.tries) !== -1
+    )
+      .sort((a, b) => b.createdAt - a.createdAt)
+      .map(item => {
+        const projection = geo
+          .geoNaturalEarth1()
+          .rotate([0, 0])
+          .precision(0.1)
+          .fitSize([item.width, item.height], { type: 'Sphere' });
+
+        const coords = projection.invert([item.x, item.y]);
+
+        return {
           country: item.country,
           x: item.x / item.width,
           y: item.y / item.height,
           tries: item.tries,
-          mobile: item.width <= 500 ? 1 : 0
-        }));
+          mobile: item.width <= 500 ? 1 : 0,
+          lat: coords[1],
+          long: coords[0]
+        };
+      });
 
     const tsv = dsv.tsvFormat(items);
 
