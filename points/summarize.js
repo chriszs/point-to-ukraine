@@ -22,14 +22,16 @@ module.exports.run = (event, context, callback) => {
     const triesToKeep = [1, 2, 3, 4, 5];
 
     const items = result.Items.filter(
-      item => triesToKeep.indexOf(item.tries) !== -1
-    ).map(item => ({
-      country: item.country,
-      x: item.x / item.width,
-      y: item.y / item.height,
-      tries: item.tries,
-      mobile: item.width <= 500 ? 1 : 0
-    }));
+          item => triesToKeep.indexOf(item.tries) !== -1
+        )
+        .sort((a,b) => b.createdAt-a.createdAt)
+        .map(item => ({
+          country: item.country,
+          x: item.x / item.width,
+          y: item.y / item.height,
+          tries: item.tries,
+          mobile: item.width <= 500 ? 1 : 0
+        }));
 
     const tsv = dsv.tsvFormat(items);
 
