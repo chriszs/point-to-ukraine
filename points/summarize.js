@@ -12,7 +12,7 @@ const params = {
     ':minTries': 1,
     ':maxTries': 5
   },
-  ProjectionExpression: 'country, x, y, width, height',
+  ProjectionExpression: 'country, x, y, tries, width, height',
   FilterExpression: 'tries >= :minTries AND tries <= :maxTries'
 };
 
