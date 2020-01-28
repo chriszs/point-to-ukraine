@@ -88,7 +88,7 @@ module.exports.run = (event, context, callback) => {
       const items = results.map(processItem);
 
       const tsv = dsv.tsvFormat(items);
-      const sampledTsv = dsv.tsvFormat(array.shuffle(items).slice(0, 2000));
+      const sampledTsv = dsv.tsvFormat(array.shuffle(items).slice(0, 3000));
 
       console.log('writing');
       return Promise.all([
