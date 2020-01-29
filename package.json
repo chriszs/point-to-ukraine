@@ -5,6 +5,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@aws/dynamodb-query-iterator": "^0.7.1",
+    "aws-sdk": "^2.610.0",
     "d3-array": "^2.4.0",
     "d3-dsv": "^1.2.0",
     "d3-geo": "^1.11.9",

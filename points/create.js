@@ -31,6 +31,8 @@ module.exports.create = (event, context, callback) => {
       width: data.width,
       height: data.height,
       tries: data.tries,
+      bot: (typeof data.bot !== 'undefined' && data.bot !== null ? data.bot : true),
+      hardMode: (typeof data.hardMode !== 'undefined' && data.hardMode !== null ? data.hardMode : 'off'),
       createdAt: timestamp,
       updatedAt: timestamp
     }
